@@ -120,6 +120,15 @@
 
       html, body, a, button { cursor: none; }
 
+      /* Always show cursor inside the video modal */
+      .video-modal,
+      .video-modal *,
+      .video-modal-overlay,
+      .video-modal-content,
+      .video-modal-close,
+      .video-modal-player { cursor: auto !important; }
+      .video-modal-close { cursor: pointer !important; }
+
       .cursor {
         position: fixed;
         width: 12px;
@@ -722,6 +731,49 @@
       cursor: pointer;
     }
 
+    /* ── Click-to-watch hint badge ── */
+    .slice-watch-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 2rem;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.9rem 0.45rem 0.6rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 40px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.4s 0.15s ease, transform 0.4s 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .slice-watch-hint svg {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0;
+      color: #fff;
+    }
+
+    .slice-watch-hint span {
+      font-family: var(--sans);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+      white-space: nowrap;
+    }
+
+    .accordion-slice:hover .slice-watch-hint {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .accordion-slice:hover {
       flex: 8;
     }
@@ -849,8 +901,9 @@
       justify-content: center;
       pointer-events: none;
       opacity: 0;
-      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-      perspective: 1500px;
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      /* Always show a real cursor in the modal — critical */
+      cursor: auto;
     }
 
     .video-modal.active {
@@ -861,68 +914,115 @@
     .video-modal-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(13, 13, 13, 0.7);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
+      background: rgba(6, 6, 6, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      cursor: auto;
     }
 
     .video-modal-content {
       position: relative;
-      width: 92vw;
-      max-width: 1400px;
-      height: 85vh;
-      border-radius: 16px;
+      width: min(90vw, 1280px);
+      max-height: 88vh;
+      aspect-ratio: 16 / 9;
+      border-radius: 14px;
       overflow: hidden;
-      transform: scale(0.92) translateY(30px) rotateX(8deg);
+      transform: scale(0.9) translateY(28px);
       opacity: 0;
-      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 30px 80px rgba(0, 0, 0, 0.7),
+        0 60px 120px rgba(0, 0, 0, 0.4);
       background: #000;
+      z-index: 1;
+      cursor: auto;
     }
 
     .video-modal.active .video-modal-content {
-      transform: scale(1) translateY(0) rotateX(0deg);
+      transform: scale(1) translateY(0);
       opacity: 1;
     }
 
+    /* Close button — top-right, always visible and clickable */
     .video-modal-close {
       position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
+      top: 1.25rem;
+      right: 1.25rem;
       z-index: 10;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(13, 13, 13, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       color: #fff;
-      width: 52px;
-      height: 52px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      backdrop-filter: blur(10px);
-      cursor: pointer;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: background 0.3s ease,
+                  border-color 0.3s ease,
+                  transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer !important;
+      /* Ensure it's never hidden by cursor:none */
+      -webkit-cursor: pointer;
     }
 
     .video-modal-close:hover {
-      background: #fff;
+      background: rgba(255, 255, 255, 0.95);
       color: #0d0d0d;
-      transform: scale(1.05) rotate(90deg);
-      border-color: #fff;
+      border-color: rgba(255, 255, 255, 0.95);
+      transform: rotate(90deg) scale(1.08);
+    }
+
+    .video-modal-close:active {
+      transform: rotate(90deg) scale(0.96);
     }
 
     .video-modal-close svg {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
+      pointer-events: none;
     }
 
     .video-modal-player {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      background: transparent;
+      background: #000;
       display: block;
-      border-radius: 16px;
+      cursor: auto;
+    }
+
+    /* Responsive modal sizing */
+    @media (max-width: 768px) {
+      .video-modal-content {
+        width: 96vw;
+        max-height: 80vh;
+        border-radius: 10px;
+      }
+
+      .video-modal-close {
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 40px;
+        height: 40px;
+      }
+
+      .video-modal-close svg {
+        width: 17px;
+        height: 17px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .video-modal-content {
+        width: 100vw;
+        max-height: 75vh;
+        border-radius: 0;
+      }
     }
 
     @media (max-width: 768px) {
@@ -2063,6 +2163,10 @@
             <h3 class="slice-name">Satwa Homes</h3>
           </div>
         </div>
+        <div class="slice-watch-hint" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+          <span>Watch Full Video</span>
+        </div>
       </div>
 
       <!-- Slice 2 -->
@@ -2077,6 +2181,10 @@
             <span class="slice-type">Full-Stack System</span>
             <h3 class="slice-name">Construction Hub</h3>
           </div>
+        </div>
+        <div class="slice-watch-hint" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+          <span>Watch Full Video</span>
         </div>
       </div>
 
@@ -2093,6 +2201,10 @@
             <h3 class="slice-name">Creative Portfolio</h3>
           </div>
         </div>
+        <div class="slice-watch-hint" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+          <span>Watch Full Video</span>
+        </div>
       </div>
 
       <!-- Slice 4 -->
@@ -2107,6 +2219,10 @@
             <span class="slice-type">Dashboard</span>
             <h3 class="slice-name">Dashboard</h3>
           </div>
+        </div>
+        <div class="slice-watch-hint" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+          <span>Watch Full Video</span>
         </div>
       </div>
     </div>
@@ -2468,45 +2584,66 @@
       animate();
 
 
-      // Video Modal Logic
+      // Video Modal Logic — intentionally outside cursor block so it works on ALL devices
+    } // END cursor block
+
+    // ── VIDEO MODAL (works on desktop, tablet, and mobile) ──
+    (function () {
       const videoModal = document.getElementById('videoModal');
       const videoModalPlayer = document.getElementById('videoModalPlayer');
       const videoModalClose = document.getElementById('videoModalClose');
       const videoModalOverlay = document.getElementById('videoModalOverlay');
 
-      if (videoModal && videoModalPlayer) {
-        const openModal = (videoSrc) => {
-          videoModalPlayer.src = videoSrc;
-          videoModal.classList.add('active');
-          document.body.style.overflow = 'hidden';
-          document.body.classList.remove('cursor-text-hover');
-          videoModalPlayer.play();
-        };
+      if (!videoModal || !videoModalPlayer) return;
 
-        const closeModal = () => {
-          videoModal.classList.remove('active');
-          document.body.style.overflow = '';
-          setTimeout(() => {
-            videoModalPlayer.pause();
-            videoModalPlayer.src = '';
-          }, 700);
-        };
+      const openModal = (videoSrc) => {
+        videoModalPlayer.src = videoSrc;
+        // Force cursor visible during modal — counteracts cursor:none on body
+        videoModal.style.cursor = 'auto';
+        videoModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        // Small delay to ensure src is set before play
+        setTimeout(() => {
+          videoModalPlayer.play().catch(() => {});
+        }, 80);
+      };
 
-        document.querySelectorAll('.accordion-slice').forEach(slice => {
-          slice.addEventListener('click', () => {
-            const video = slice.querySelector('video');
-            if (video && video.src) {
-              const src = video.currentSrc || video.src;
-              openModal(src);
-            }
-          });
+      const closeModal = () => {
+        videoModal.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          videoModalPlayer.pause();
+          videoModalPlayer.src = '';
+        }, 550); // Match CSS transition duration
+      };
+
+      // Open on accordion slice click
+      document.querySelectorAll('.accordion-slice').forEach(slice => {
+        slice.addEventListener('click', () => {
+          const video = slice.querySelector('video');
+          if (video) {
+            const src = video.currentSrc || video.getAttribute('src');
+            if (src) openModal(src);
+          }
         });
+      });
 
-        videoModalClose.addEventListener('click', closeModal);
-        videoModalOverlay.addEventListener('click', closeModal);
-      }
+      // Close on button click
+      videoModalClose.addEventListener('click', closeModal);
 
-      // Magnetic Elements
+      // Close on overlay (outside video) click
+      videoModalOverlay.addEventListener('click', closeModal);
+
+      // Close on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+          closeModal();
+        }
+      });
+    })();
+
+    // ── Mouse-only features (magnetic, footer reveal) ──
+    if (cursor && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
       const magneticElements = document.querySelectorAll('.magnetic');
       magneticElements.forEach(elem => {
         elem.addEventListener('mousemove', e => {
