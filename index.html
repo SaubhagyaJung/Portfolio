@@ -797,15 +797,14 @@
       object-fit: cover;
       object-position: center;
       display: block;
-      opacity: 0.5; /* Show video slightly by default */
-      filter: grayscale(80%) contrast(1.1);
-      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease;
+      opacity: 0; /* Fully hidden by default — pure black box */
+      filter: grayscale(0%) contrast(1);
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.55s ease;
     }
 
     .accordion-slice:hover .slice-media video {
       transform: scale(1.03);
       opacity: 1;
-      filter: grayscale(0%) contrast(1);
     }
 
     .slice-overlay {
@@ -922,9 +921,9 @@
 
     .video-modal-content {
       position: relative;
+      /* Size is set dynamically by JS to match video's natural aspect ratio */
       width: min(90vw, 1280px);
-      max-height: 88vh;
-      aspect-ratio: 16 / 9;
+      height: auto;
       border-radius: 14px;
       overflow: hidden;
       transform: scale(0.9) translateY(28px);
@@ -989,8 +988,9 @@
 
     .video-modal-player {
       width: 100%;
-      height: 100%;
-      object-fit: contain;
+      height: auto;
+      max-height: 88vh;
+      object-fit: cover;
       background: #000;
       display: block;
       cursor: auto;
@@ -1000,8 +1000,11 @@
     @media (max-width: 768px) {
       .video-modal-content {
         width: 96vw;
-        max-height: 80vh;
         border-radius: 10px;
+      }
+
+      .video-modal-player {
+        max-height: 80vh;
       }
 
       .video-modal-close {
@@ -1020,8 +1023,11 @@
     @media (max-width: 480px) {
       .video-modal-content {
         width: 100vw;
-        max-height: 75vh;
         border-radius: 0;
+      }
+
+      .video-modal-player {
+        max-height: 75vh;
       }
     }
 
@@ -2597,15 +2603,31 @@
       if (!videoModal || !videoModalPlayer) return;
 
       const openModal = (videoSrc) => {
+        const modalContent = document.querySelector('.video-modal-content');
         videoModalPlayer.src = videoSrc;
-        // Force cursor visible during modal — counteracts cursor:none on body
         videoModal.style.cursor = 'auto';
-        videoModal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        // Small delay to ensure src is set before play
-        setTimeout(() => {
+
+        // Size the modal to match the video's actual aspect ratio once metadata loads
+        videoModalPlayer.onloadedmetadata = () => {
+          const vw = videoModalPlayer.videoWidth;
+          const vh = videoModalPlayer.videoHeight;
+          if (vw && vh && modalContent) {
+            const maxW = window.innerWidth * 0.90;
+            const maxH = window.innerHeight * 0.88;
+            let w = Math.min(maxW, 1280);
+            let h = w * (vh / vw);
+            if (h > maxH) {
+              h = maxH;
+              w = h * (vw / vh);
+            }
+            modalContent.style.width = `${Math.round(w)}px`;
+            modalContent.style.aspectRatio = `${vw} / ${vh}`;
+          }
           videoModalPlayer.play().catch(() => {});
-        }, 80);
+        };
+
+        videoModal.classList.add('active');
       };
 
       const closeModal = () => {
@@ -2614,7 +2636,14 @@
         setTimeout(() => {
           videoModalPlayer.pause();
           videoModalPlayer.src = '';
-        }, 550); // Match CSS transition duration
+          videoModalPlayer.onloadedmetadata = null;
+          // Reset dynamic sizing so next video can recalculate
+          const modalContent = document.querySelector('.video-modal-content');
+          if (modalContent) {
+            modalContent.style.width = '';
+            modalContent.style.aspectRatio = '';
+          }
+        }, 550);
       };
 
       // Open on accordion slice click
