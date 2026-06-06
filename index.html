@@ -13,6 +13,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     /* ══════════════════════════════════════════════════
        RESET & CUSTOM PROPERTIES
@@ -1019,6 +1020,43 @@
       }
     }
 
+    @media (max-width: 900px) {
+
+      .footer-reference-panel {
+        margin: 0 -2rem;
+        padding: 3.5rem 2rem 3rem;
+      }
+
+      .footer-reference-inner {
+        grid-template-columns: 1fr;
+        gap: 2.4rem;
+      }
+
+      .footer-reference-media {
+        height: 260px;
+      }
+
+      .footer-reference-copy {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+      }
+
+      .footer-bottom {
+        min-height: 50vh;
+        padding: 5rem 1.5rem 4rem;
+      }
+
+      .footer-nav-cloud {
+        justify-content: flex-start;
+        text-align: left;
+        gap: 0.35rem 1rem;
+      }
+
+      .footer-bottom-inner {
+        width: min(640px, 100%);
+      }
+
+    }
+
     @media (max-width: 480px) {
       .video-modal-content {
         width: 100vw;
@@ -1380,9 +1418,10 @@
        FOOTER
     ══════════════════════════════════════════════════ */
     footer {
-      background: var(--bg-dark);
+      background: #000;
       color: var(--white);
-      padding: 6rem 3.5rem 2.5rem;
+      padding: 7rem 3.5rem 0;
+      overflow: hidden;
     }
 
     .footer-grid {
@@ -1424,24 +1463,8 @@
     .footer-heading-wrap:hover h2 {
       -webkit-text-stroke: 1px rgba(250, 250, 247, 0.8);
     }
-
     .footer-heading-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--white);
-      -webkit-background-clip: text;
-      color: transparent;
-      clip-path: circle(0% at 50% 50%);
-      transition: clip-path 0.1s ease-out;
-      z-index: 3;
-      pointer-events: none;
-    }
-
-    .footer-heading-wrap:hover .footer-heading-bg {
-      /* JS will update clip-path to follow mouse */
+      display: none !important;
     }
 
 
@@ -1553,39 +1576,196 @@
       color: rgba(250, 250, 247, 0.2);
     }
 
-    .footer-bottom {
+    /* Reference-style strip below the Get In Touch section */
+    .footer-reference-panel {
+      position: relative;
+      margin: 0 -3.5rem;
+      padding: 4.5rem 3.5rem 3.2rem;
+      background: #000;
+      color: #fff;
+      border-top: 8px solid var(--bg);
+      border-bottom: 8px solid var(--bg);
+      overflow: hidden;
+    }
+
+    .footer-reference-inner {
       max-width: 1100px;
       margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: minmax(280px, 0.48fr) minmax(320px, 0.52fr);
+      gap: 4.2rem;
       align-items: center;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(250, 250, 247, 0.06);
     }
 
-    .footer-bottom-left {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
+    .footer-reference-media {
+      position: relative;
+      width: 100%;
+      height: clamp(220px, 26vw, 315px);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #101010;
     }
 
-    .footer-wm {
-      font-family: var(--serif);
-      font-size: 1.1rem;
+    .footer-reference-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      filter: brightness(0.68) saturate(0.78);
+      transform: scale(1.02);
+    }
+
+    .footer-reference-media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.35), rgba(0,0,0,0));
+      pointer-events: none;
+    }
+
+    .footer-reference-overline {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(250, 250, 247, 0.28);
+      margin-bottom: 1.1rem;
+    }
+
+    .footer-reference-copy {
+      font-family: var(--sans);
+      font-size: clamp(1.7rem, 3vw, 2.75rem);
+      font-weight: 500;
+      line-height: 1.06;
+      letter-spacing: -0.07em;
+      color: #fff;
+      max-width: 640px;
+    }
+
+    .footer-green {
+      color: #00ff6a;
       font-weight: 600;
     }
 
-    .footer-copy {
-      font-size: 0.65rem;
-      font-weight: 300;
-      color: rgba(250, 250, 247, 0.2);
+    .footer-reference-link {
+      display: inline-block;
+      margin-top: 1.9rem;
+      font-size: 0.74rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(250, 250, 247, 0.78);
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 0.12rem;
+      transition: color 0.25s ease, opacity 0.25s ease;
     }
 
-    .footer-tagline {
-      font-size: 0.6rem;
+    .footer-reference-link:hover {
+      color: #00ff6a;
+    }
+
+    .footer-mini-copy {
+      margin-top: 4rem;
+      text-align: center;
+      font-family: var(--sans);
+      font-size: 0.62rem;
       font-weight: 300;
-      letter-spacing: 0.06em;
-      color: rgba(250, 250, 247, 0.15);
+      letter-spacing: 0.09em;
+      color: rgba(250, 250, 247, 0.27);
+      text-transform: uppercase;
+    }
+
+    /* Under-page force-scroll reveal, matching the reference video rhythm */
+    .footer-bottom {
+      width: 100%;
+      min-height: 58vh;
+      padding: 7rem 2rem 5rem;
+      background: #000;
+      color: #fff;
+      border-top: 8px solid var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(90px);
+      transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-bottom.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .footer-bottom-inner {
+      width: min(920px, 100%);
+      margin: 0 auto;
+    }
+
+    .footer-nav-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: baseline;
+      gap: 0.15rem 1.15rem;
+      margin-bottom: 3.4rem;
+    }
+
+    .footer-cloud-link {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.58rem;
+      color: #fff;
+      white-space: nowrap;
+      transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .footer-cloud-link:hover {
+      opacity: 0.72;
+      transform: translateY(-2px);
+    }
+
+    .footer-cloud-title {
+      font-family: var(--sans);
+      font-size: clamp(2.1rem, 4.6vw, 4.15rem);
+      font-weight: 500;
+      line-height: 0.88;
+      letter-spacing: -0.09em;
+      text-transform: uppercase;
+    }
+
+    .footer-cloud-sub {
+      font-family: var(--sans);
+      font-size: clamp(0.76rem, 1.2vw, 1.05rem);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.06em;
+      color: rgba(250, 250, 247, 0.75);
+      text-transform: lowercase;
+    }
+
+    .footer-wm {
+      display: block;
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      font-weight: 300;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(250, 250, 247, 0.28);
+      margin-top: 0.2rem;
+    }
+
+    .footer-copy {
+      display: block;
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      font-weight: 300;
+      letter-spacing: 0.09em;
+      color: rgba(250, 250, 247, 0.28);
+      text-transform: uppercase;
     }
 
     .footer-socials {
@@ -1862,14 +2042,8 @@
       }
 
       .footer-bottom {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-      }
-
-      .footer-bottom-left {
-        flex-direction: column;
-        gap: 0.5rem;
+        min-height: 26vh;
+        padding: 4rem 1.5rem 5rem;
       }
 
       .scroll-prompt {
@@ -1949,6 +2123,48 @@
       }
     }
 
+
+    @media (max-width: 480px) {
+      .footer-reference-panel {
+        margin: 0 -1.2rem;
+        padding: 3rem 1.2rem 2.7rem;
+        border-top-width: 6px;
+        border-bottom-width: 6px;
+      }
+
+      .footer-reference-media {
+        height: 220px;
+        border-radius: 10px;
+      }
+
+      .footer-reference-overline {
+        font-size: 0.62rem;
+      }
+
+      .footer-reference-link {
+        font-size: 0.68rem;
+      }
+
+      .footer-mini-copy,
+      .footer-copy,
+      .footer-wm {
+        font-size: 0.56rem;
+      }
+
+      .footer-bottom {
+        border-top-width: 6px;
+        padding: 4.5rem 1.2rem 3.5rem;
+      }
+
+      .footer-cloud-link {
+        gap: 0.4rem;
+      }
+
+      .footer-cloud-title {
+        font-size: clamp(2rem, 13vw, 3.4rem);
+      }
+    }
+
     /* ══════════════════════════════════════════════════
        INTERACTIVE OBJECTS: GRAFFITI MODE
     ══════════════════════════════════════════════════ */
@@ -2007,7 +2223,694 @@
         font-size: 0.7rem;
       }
     }
-  </style>
+  
+
+    /* ══════════════════════════════════════════════════
+       FINAL FOOTER STACK — DIRECT UNDER-PAGE COPYRIGHT
+       The contact screen ends cleanly, then the copyright/nav panel
+       sits immediately underneath as the next scroll section.
+    ══════════════════════════════════════════════════ */
+    footer#contact {
+      min-height: 100vh;
+      background: #000;
+      color: var(--white);
+      padding: clamp(5.5rem, 8vw, 7rem) 3.5rem 0;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      overflow: hidden;
+      border-bottom: 0;
+    }
+
+    footer#contact .footer-grid {
+      width: 100%;
+      min-height: calc(100vh - clamp(5.5rem, 8vw, 7rem));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+      padding-bottom: clamp(2rem, 4vh, 3.5rem);
+    }
+
+    footer#contact .footer-left {
+      width: 100%;
+      min-height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    footer#contact .footer-heading-wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    footer#contact .footer-left h2,
+    footer#contact .footer-heading-bg {
+      font-size: clamp(4.8rem, 11.5vw, 12rem);
+      line-height: 0.88;
+      letter-spacing: -0.055em;
+      text-align: center;
+    }
+
+
+    footer#contact .footer-heading-wrap:hover h2 {
+      -webkit-text-stroke: 1px rgba(250, 250, 247, 0.9);
+      text-shadow: 0 0 24px rgba(250, 250, 247, 0.16);
+    }
+
+    footer#contact .footer-content-row {
+      max-width: 1100px;
+      width: 100%;
+      margin: clamp(3rem, 7vh, 5rem) auto 0;
+      padding: 0 2rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2.5rem;
+    }
+
+    footer#contact .footer-content-left {
+      gap: 2rem;
+    }
+
+    footer#contact .footer-left p {
+      color: rgba(250, 250, 247, 0.48);
+      max-width: 360px;
+      font-size: clamp(0.92rem, 1.2vw, 1.05rem);
+      line-height: 1.75;
+    }
+
+    footer#contact .footer-right,
+    footer#contact .footer-reference-panel,
+    footer#contact .footer-mini-copy {
+      display: none !important;
+    }
+
+    .footer-bottom {
+      width: 100%;
+      min-height: 66vh;
+      margin: 0;
+      padding: clamp(5rem, 9vw, 7.5rem) 8vw clamp(4.5rem, 7vw, 6rem);
+      background: #000;
+      color: #fff;
+      border-top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .footer-bottom::before,
+    .footer-bottom::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(250, 250, 247, 0.06);
+      pointer-events: none;
+    }
+
+    .footer-bottom::before {
+      left: 0.5rem;
+    }
+
+    .footer-bottom::after {
+      right: 0.5rem;
+    }
+
+    .footer-bottom-inner {
+      width: min(1040px, 100%);
+      margin: 0 auto;
+      position: relative;
+      min-height: 280px;
+    }
+
+    .footer-nav-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: baseline;
+      gap: 0.4rem clamp(1.15rem, 2.2vw, 2.2rem);
+      max-width: 980px;
+      margin: 0;
+    }
+
+    .footer-cloud-link {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.65rem;
+      color: #fff;
+      white-space: nowrap;
+      transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .footer-cloud-title {
+      font-family: var(--sans);
+      font-size: clamp(2.85rem, 5vw, 4.8rem);
+      font-weight: 600;
+      line-height: 0.88;
+      letter-spacing: -0.115em;
+      text-transform: uppercase;
+    }
+
+    .footer-cloud-sub {
+      font-family: var(--sans);
+      font-size: clamp(0.9rem, 1.35vw, 1.25rem);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.07em;
+      color: rgba(250, 250, 247, 0.62);
+      text-transform: lowercase;
+    }
+
+    .footer-bottom-dot {
+      display: block;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #fff;
+      margin-top: clamp(2.1rem, 4vw, 3.1rem);
+      margin-left: clamp(0.2rem, 1.8vw, 1.6rem);
+    }
+
+    .footer-bottom .footer-copy {
+      position: absolute;
+      left: 50%;
+      bottom: clamp(0.4rem, 1.2vw, 1rem);
+      transform: translateX(-50%);
+      display: block;
+      text-align: center;
+      font-family: var(--sans);
+      font-size: clamp(0.72rem, 1vw, 0.9rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: rgba(250, 250, 247, 0.28);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 900px) {
+      footer#contact {
+        min-height: 100vh;
+        padding: 6rem 2rem 0;
+      }
+
+      footer#contact .footer-grid {
+        min-height: calc(100vh - 6rem);
+      }
+
+      footer#contact .footer-left h2,
+      footer#contact .footer-heading-bg {
+        font-size: clamp(3.8rem, 14vw, 6.8rem);
+      }
+
+      footer#contact .footer-content-row {
+        padding: 0;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      footer#contact .footer-content-left {
+        align-items: center;
+      }
+
+      footer#contact .footer-left p {
+        text-align: center;
+      }
+
+      .footer-bottom {
+        min-height: 72vh;
+        padding: 5rem 1.5rem 4rem;
+      }
+
+      .footer-bottom-inner {
+        min-height: 340px;
+      }
+
+      .footer-nav-cloud {
+        gap: 0.55rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 540px) {
+      footer#contact {
+        padding: 5.2rem 1.2rem 0;
+      }
+
+      footer#contact .footer-grid {
+        min-height: calc(100vh - 5.2rem);
+      }
+
+      footer#contact .footer-content-row {
+        margin-top: 2.5rem;
+      }
+
+      .footer-bottom {
+        min-height: 70vh;
+        padding: 4.2rem 1.2rem 3.5rem;
+      }
+
+      .footer-cloud-title {
+        font-size: clamp(2.35rem, 15vw, 3.2rem);
+      }
+
+      .footer-cloud-sub {
+        font-size: 0.85rem;
+      }
+
+      .footer-bottom-dot {
+        width: 19px;
+        height: 19px;
+      }
+    }
+
+
+    /* ══════════════════════════════════════════════════
+       FIXED UNDER-PAGE FOOTER REVEAL
+       The ABOUT / WORK / CREATIVE / CONTACT / MADE BY panel stays fixed
+       underneath the site. The Get In Touch footer scrolls upward to reveal it.
+    ══════════════════════════════════════════════════ */
+    :root {
+      --underpage-footer-height: clamp(420px, 62vh, 640px);
+    }
+
+    body {
+      background: #000;
+    }
+
+    .page-scroll-layer {
+      position: relative;
+      z-index: 2;
+      background: var(--bg);
+      margin-bottom: var(--underpage-footer-height);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.45);
+    }
+
+    footer#contact {
+      position: relative;
+      z-index: 3;
+      margin-bottom: 0 !important;
+      border-bottom: 0 !important;
+    }
+
+    .footer-bottom {
+      position: fixed !important;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: var(--underpage-footer-height);
+      min-height: unset !important;
+      z-index: 1;
+      margin: 0 !important;
+      padding: clamp(4.5rem, 7vw, 6.5rem) 8vw clamp(3.6rem, 5vw, 5rem) !important;
+      background: #000;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+      will-change: transform;
+    }
+
+    .footer-bottom-inner {
+      width: min(1040px, 100%);
+      min-height: min(280px, calc(var(--underpage-footer-height) - 7rem));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .footer-bottom::before,
+    .footer-bottom::after {
+      opacity: 1;
+    }
+
+    @media (max-width: 900px) {
+      :root {
+        --underpage-footer-height: clamp(430px, 68vh, 700px);
+      }
+
+      .footer-bottom {
+        padding: 4.4rem 1.5rem 3.8rem !important;
+      }
+    }
+
+    @media (max-width: 540px) {
+      :root {
+        --underpage-footer-height: clamp(420px, 72vh, 680px);
+      }
+
+      .footer-bottom {
+        padding: 4rem 1.2rem 3.5rem !important;
+      }
+    }
+
+
+    /* ══════════════════════════════════════════════════
+       FOOTER NAV REFINEMENT — CENTERED, INTER, NO MOTION
+    ══════════════════════════════════════════════════ */
+    .footer-bottom {
+      text-align: center !important;
+    }
+
+    .footer-bottom-inner {
+      width: min(1080px, 100%) !important;
+      margin: 0 auto !important;
+      align-items: center !important;
+      text-align: center !important;
+    }
+
+    .footer-nav-cloud {
+      justify-content: center !important;
+      align-items: baseline !important;
+      max-width: 1000px !important;
+      margin: 0 auto !important;
+      gap: 0.65rem clamp(1.45rem, 2.8vw, 3rem) !important;
+      text-align: center !important;
+    }
+
+    .footer-cloud-link {
+      gap: 0.78rem !important;
+      color: #fff !important;
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .footer-cloud-link:hover {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .footer-cloud-title {
+      font-family: 'Inter', var(--sans), -apple-system, BlinkMacSystemFont, sans-serif !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.015em !important;
+      color: #fff !important;
+      transition: none !important;
+    }
+
+    .footer-cloud-link:hover .footer-cloud-title {
+      color: #fff !important;
+    }
+
+    .footer-cloud-sub {
+      letter-spacing: 0.045em !important;
+      color: rgba(250, 250, 247, 0.48) !important;
+      transition: color 0.22s ease !important;
+    }
+
+    .footer-cloud-link:hover .footer-cloud-sub {
+      color: rgba(250, 250, 247, 0.95) !important;
+    }
+
+    .footer-bottom-dot {
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    .footer-bottom .footer-copy {
+      letter-spacing: 0.18em !important;
+    }
+
+    @media (max-width: 540px) {
+      .footer-nav-cloud {
+        gap: 0.65rem 1.15rem !important;
+      }
+
+      .footer-cloud-link {
+        gap: 0.45rem !important;
+      }
+
+      .footer-cloud-title {
+        letter-spacing: 0.005em !important;
+      }
+
+      .footer-cloud-sub {
+        letter-spacing: 0.035em !important;
+      }
+    }
+
+
+    /* ══════════════════════════════════════════════════
+       FOOTER REVEAL SIZE TUNING — SMALLER, BALANCED SPACING
+    ══════════════════════════════════════════════════ */
+    :root {
+      --underpage-footer-height: clamp(350px, 50vh, 520px);
+    }
+
+    .footer-bottom {
+      padding: clamp(3.3rem, 5.2vw, 4.8rem) 8vw clamp(2.8rem, 4vw, 3.8rem) !important;
+    }
+
+    .footer-bottom-inner {
+      min-height: min(220px, calc(var(--underpage-footer-height) - 5.5rem)) !important;
+      width: min(960px, 100%) !important;
+    }
+
+    .footer-nav-cloud {
+      max-width: 900px !important;
+      gap: 0.5rem clamp(1.15rem, 2.15vw, 2.35rem) !important;
+      margin-bottom: 2.45rem !important;
+    }
+
+    .footer-cloud-link {
+      gap: 0.62rem !important;
+    }
+
+    .footer-cloud-title {
+      font-size: clamp(1.85rem, 3.75vw, 3.35rem) !important;
+      line-height: 0.94 !important;
+      letter-spacing: 0.006em !important;
+    }
+
+    .footer-cloud-sub {
+      font-size: clamp(0.72rem, 1.02vw, 0.92rem) !important;
+      letter-spacing: 0.032em !important;
+    }
+
+    .footer-bottom-dot {
+      width: 18px !important;
+      height: 18px !important;
+      margin-bottom: 2.25rem !important;
+    }
+
+    .footer-bottom .footer-copy {
+      letter-spacing: 0.13em !important;
+      font-size: 0.64rem !important;
+    }
+
+    @media (max-width: 900px) {
+      :root {
+        --underpage-footer-height: clamp(380px, 58vh, 580px);
+      }
+
+      .footer-bottom {
+        padding: 3.7rem 1.5rem 3.1rem !important;
+      }
+
+      .footer-nav-cloud {
+        max-width: 680px !important;
+        gap: 0.55rem 1.35rem !important;
+      }
+
+      .footer-cloud-title {
+        font-size: clamp(2rem, 9vw, 3.05rem) !important;
+      }
+    }
+
+    @media (max-width: 540px) {
+      :root {
+        --underpage-footer-height: clamp(390px, 66vh, 620px);
+      }
+
+      .footer-bottom {
+        padding: 3.4rem 1.2rem 3rem !important;
+      }
+
+      .footer-nav-cloud {
+        gap: 0.5rem 1rem !important;
+      }
+
+      .footer-cloud-link {
+        gap: 0.4rem !important;
+      }
+
+      .footer-cloud-title {
+        font-size: clamp(1.9rem, 12vw, 2.75rem) !important;
+        letter-spacing: 0.002em !important;
+      }
+
+      .footer-cloud-sub {
+        font-size: 0.76rem !important;
+        letter-spacing: 0.026em !important;
+      }
+    }
+
+
+    /* ══════════════════════════════════════════════════
+       FINAL FOOTER REVEAL REFINEMENT — REFERENCE ARRANGEMENT
+    ══════════════════════════════════════════════════ */
+    .footer-bottom-inner {
+      width: min(1180px, 100%) !important;
+      min-height: min(230px, calc(var(--underpage-footer-height) - 5rem)) !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .footer-nav-cloud {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 0.42rem !important;
+      max-width: 1180px !important;
+      width: 100% !important;
+      margin: 0 auto 2.85rem !important;
+      text-align: center !important;
+    }
+
+    .footer-cloud-row {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      align-items: baseline !important;
+      justify-content: center !important;
+      gap: 0.34rem clamp(1.05rem, 2vw, 2.1rem) !important;
+      width: 100% !important;
+    }
+
+    .footer-cloud-link {
+      display: inline-flex !important;
+      align-items: baseline !important;
+      justify-content: center !important;
+      gap: clamp(0.42rem, 0.8vw, 0.72rem) !important;
+      color: #fff !important;
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+      white-space: nowrap !important;
+    }
+
+    .footer-cloud-link:hover {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .footer-cloud-title {
+      font-family: 'Inter', var(--sans), -apple-system, BlinkMacSystemFont, sans-serif !important;
+      font-size: clamp(2.15rem, 4.25vw, 4.15rem) !important;
+      font-weight: 400 !important;
+      line-height: 0.9 !important;
+      letter-spacing: -0.055em !important;
+      text-transform: uppercase !important;
+      color: #fff !important;
+      transition: none !important;
+    }
+
+    .footer-cloud-link:hover .footer-cloud-title {
+      color: #fff !important;
+    }
+
+    .footer-cloud-sub {
+      font-family: 'Inter', var(--sans), -apple-system, BlinkMacSystemFont, sans-serif !important;
+      font-size: clamp(0.82rem, 1.17vw, 1.08rem) !important;
+      font-weight: 300 !important;
+      line-height: 1 !important;
+      letter-spacing: -0.065em !important;
+      color: rgba(250, 250, 247, 0.64) !important;
+      text-transform: lowercase !important;
+      transition: color 0.22s ease !important;
+    }
+
+    .footer-cloud-link:hover .footer-cloud-sub {
+      color: rgba(250, 250, 247, 0.98) !important;
+    }
+
+    .footer-bottom-dot {
+      display: none !important;
+    }
+
+    .footer-bottom .footer-copy {
+      position: static !important;
+      transform: none !important;
+      display: block !important;
+      margin: 0 auto !important;
+      font-family: 'Inter', var(--sans), -apple-system, BlinkMacSystemFont, sans-serif !important;
+      font-size: clamp(0.68rem, 1vw, 0.82rem) !important;
+      font-weight: 300 !important;
+      letter-spacing: 0.12em !important;
+      color: rgba(250, 250, 247, 0.34) !important;
+      text-align: center !important;
+      text-transform: uppercase !important;
+    }
+
+    @media (max-width: 900px) {
+      .footer-nav-cloud {
+        gap: 0.48rem !important;
+        margin-bottom: 2.55rem !important;
+      }
+
+      .footer-cloud-row {
+        gap: 0.38rem 1.05rem !important;
+      }
+
+      .footer-cloud-title {
+        font-size: clamp(1.95rem, 8.6vw, 3.2rem) !important;
+        letter-spacing: -0.052em !important;
+      }
+
+      .footer-cloud-sub {
+        font-size: clamp(0.75rem, 2.7vw, 0.95rem) !important;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .footer-bottom {
+        padding: 3.25rem 1.1rem 2.85rem !important;
+      }
+
+      .footer-nav-cloud {
+        margin-bottom: 2.35rem !important;
+      }
+
+      .footer-cloud-row {
+        gap: 0.42rem 0.82rem !important;
+      }
+
+      .footer-cloud-title {
+        font-size: clamp(1.72rem, 11vw, 2.65rem) !important;
+        letter-spacing: -0.045em !important;
+      }
+
+      .footer-cloud-sub {
+        font-size: 0.74rem !important;
+        letter-spacing: -0.045em !important;
+      }
+    }
+
+  
+
+    /* Outline-only footer hover: no circular fill/mask */
+    #footerHeadingBg {
+      display: none !important;
+    }
+
+    footer#contact .footer-heading-wrap:hover h2 {
+      -webkit-text-stroke: 1px rgba(250, 250, 247, 0.9);
+      text-shadow: 0 0 24px rgba(250, 250, 247, 0.16);
+    }
+</style>
 </head>
 
 <body>
@@ -2029,6 +2932,8 @@
 
   <!-- Custom cursor -->
   <div class="cursor" id="cursor"></div>
+
+  <div class="page-scroll-layer">
 
   <!-- ══════════════════════════════════════════════════
        NAVIGATION
@@ -2429,34 +3334,26 @@
             </a>
           </div>
         </div>
+      </div></div></footer>
+  </div>
+
+  <!-- Under-page sticky reveal footer, inspired by the reference video -->
+  <div class="footer-bottom" aria-label="Footer links and copyright">
+    <div class="footer-bottom-inner">
+      <div class="footer-nav-cloud" role="navigation" aria-label="Footer navigation">
+        <div class="footer-cloud-row footer-cloud-row-top">
+          <a href="#about" class="footer-cloud-link"><span class="footer-cloud-title">About</span><span class="footer-cloud-sub">about me</span></a>
+          <a href="#work" class="footer-cloud-link"><span class="footer-cloud-title">Work</span><span class="footer-cloud-sub">projects</span></a>
+          <a href="#creative" class="footer-cloud-link"><span class="footer-cloud-title">Creative</span><span class="footer-cloud-sub">design</span></a>
+        </div>
+        <div class="footer-cloud-row footer-cloud-row-bottom">
+          <a href="mailto:hello@saubhagya.dev" class="footer-cloud-link"><span class="footer-cloud-title">Contact</span><span class="footer-cloud-sub">email</span></a>
+          <span class="footer-cloud-link"><span class="footer-cloud-title">Made By</span><span class="footer-cloud-sub">saubhagya</span></span>
+        </div>
       </div>
-      <div class="footer-right reveal reveal-d2">
-        <a href="#work" class="footer-link-block">
-          <span class="fl-title">Work</span>
-          <span class="fl-sub">selected projects</span>
-        </a>
-        <a href="#about" class="footer-link-block">
-          <span class="fl-title">About</span>
-          <span class="fl-sub">about me</span>
-        </a>
-        <a href="#creative" class="footer-link-block">
-          <span class="fl-title">Creative</span>
-          <span class="fl-sub">design & motion</span>
-        </a>
-        <a href="mailto:hello@saubhagya.dev" class="footer-link-block">
-          <span class="fl-title">Contact</span>
-          <span class="fl-sub">get in touch</span>
-        </a>
-      </div>
+      <span class="footer-copy">©2025 Saubhagya.</span>
     </div>
-    <div class="footer-bottom">
-      <div class="footer-bottom-left">
-        <span class="footer-wm">saubhagya.</span>
-        <span class="footer-copy">© 2025</span>
-      </div>
-      <span class="footer-tagline">Studying BIT · Itahari International College</span>
-    </div>
-  </footer>
+  </div>
 
   <!-- Video Modal -->
   <div class="video-modal" id="videoModal">
@@ -2684,21 +3581,6 @@
           elem.style.transform = `translate(0px, 0px)`;
         });
       });
-
-      // Footer Masking Effect
-      const footerWrap = document.getElementById('footerHeadingWrap');
-      const footerBg = document.getElementById('footerHeadingBg');
-      if (footerWrap && footerBg) {
-        footerWrap.addEventListener('mousemove', e => {
-          const rect = footerWrap.getBoundingClientRect();
-          const x = ((e.clientX - rect.left) / rect.width) * 100;
-          const y = ((e.clientY - rect.top) / rect.height) * 100;
-          footerBg.style.clipPath = `circle(150px at ${x}% ${y}%)`;
-        });
-        footerWrap.addEventListener('mouseleave', () => {
-          footerBg.style.clipPath = `circle(0% at 50% 50%)`;
-        });
-      }
     }
 
     // ── Mobile toggle ──
@@ -3076,6 +3958,17 @@
       activeCanvasInfo.ctx.drawImage(currentBrush, -brushRadius, -brushRadius);
       activeCanvasInfo.ctx.restore();
     }
+    // Footer bottom reveal
+    const footerBottom = document.querySelector('.footer-bottom');
+    if (footerBottom) {
+      const footerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) footerBottom.classList.add('visible');
+        });
+      }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+      footerObserver.observe(footerBottom);
+    }
+
   </script>
 </body>
 
