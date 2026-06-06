@@ -3033,6 +3033,210 @@
       }
     }
 
+
+    /* ══════════════════════════════════════════════════
+       FINAL TYPOGRAPHY TUNING — REFERENCE-LIKE FOOTER SPACING
+       Matches the tighter, cleaner line/letter/word spacing from the provided reference.
+    ══════════════════════════════════════════════════ */
+
+    .footer-bottom-inner {
+      width: min(1080px, 100%) !important;
+      max-width: 1080px !important;
+      min-height: min(215px, calc(var(--underpage-footer-height) - 5rem)) !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .footer-nav-cloud {
+      width: min(1080px, 100%) !important;
+      max-width: 1080px !important;
+      margin: 0 auto 2.35rem !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 0.14rem !important;
+      text-align: center !important;
+    }
+
+    .footer-cloud-row {
+      width: 100% !important;
+      display: flex !important;
+      flex-wrap: wrap !important;
+      align-items: baseline !important;
+      justify-content: center !important;
+      gap: 0.18rem clamp(0.45rem, 0.9vw, 0.95rem) !important;
+    }
+
+    .footer-cloud-link {
+      display: inline-flex !important;
+      align-items: baseline !important;
+      justify-content: center !important;
+      gap: clamp(0.18rem, 0.35vw, 0.34rem) !important;
+      white-space: nowrap !important;
+      word-spacing: -0.08em !important;
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .footer-cloud-title {
+      font-family: 'Inter', var(--sans), -apple-system, BlinkMacSystemFont, sans-serif !important;
+      font-size: clamp(2.15rem, 4.55vw, 4.25rem) !important;
+      font-weight: 300 !important;
+      line-height: 0.86 !important;
+      letter-spacing: -0.082em !important;
+      word-spacing: -0.10em !important;
+      text-transform: uppercase !important;
+      color: rgba(225, 225, 225, 0.78) !important;
+      -webkit-font-smoothing: antialiased !important;
+      text-rendering: geometricPrecision !important;
+      transition: none !important;
+    }
+
+    .footer-cloud-link:hover .footer-cloud-title {
+      color: rgba(225, 225, 225, 0.78) !important;
+    }
+
+    .footer-cloud-sub {
+      font-family: 'Inter', var(--sans), -apple-system, BlinkMacSystemFont, sans-serif !important;
+      font-size: clamp(0.82rem, 1.28vw, 1.16rem) !important;
+      font-weight: 300 !important;
+      line-height: 0.92 !important;
+      letter-spacing: -0.09em !important;
+      word-spacing: -0.10em !important;
+      color: rgba(250, 250, 247, 0.55) !important;
+      text-transform: lowercase !important;
+      transition: color 0.22s ease !important;
+    }
+
+    .footer-cloud-link:hover .footer-cloud-sub {
+      color: rgba(250, 250, 247, 0.95) !important;
+    }
+
+    .footer-bottom .footer-copy {
+      margin-top: 0 !important;
+      font-family: 'Inter', var(--sans), -apple-system, BlinkMacSystemFont, sans-serif !important;
+      font-size: clamp(0.68rem, 0.9vw, 0.78rem) !important;
+      font-weight: 300 !important;
+      letter-spacing: 0.08em !important;
+      color: rgba(250, 250, 247, 0.36) !important;
+      text-align: center !important;
+      text-transform: uppercase !important;
+    }
+
+    @media (max-width: 900px) {
+      .footer-bottom-inner,
+      .footer-nav-cloud {
+        width: min(760px, 100%) !important;
+        max-width: 760px !important;
+      }
+
+      .footer-nav-cloud {
+        gap: 0.22rem !important;
+        margin-bottom: 2.15rem !important;
+      }
+
+      .footer-cloud-row {
+        gap: 0.24rem 0.68rem !important;
+      }
+
+      .footer-cloud-title {
+        font-size: clamp(1.85rem, 8vw, 3.15rem) !important;
+        letter-spacing: -0.075em !important;
+      }
+
+      .footer-cloud-sub {
+        font-size: clamp(0.72rem, 2.4vw, 0.92rem) !important;
+        letter-spacing: -0.075em !important;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .footer-bottom-inner,
+      .footer-nav-cloud {
+        width: min(430px, 100%) !important;
+        max-width: 430px !important;
+      }
+
+      .footer-nav-cloud {
+        gap: 0.28rem !important;
+        margin-bottom: 2rem !important;
+      }
+
+      .footer-cloud-row {
+        gap: 0.32rem 0.58rem !important;
+      }
+
+      .footer-cloud-title {
+        font-size: clamp(1.52rem, 10.5vw, 2.38rem) !important;
+        letter-spacing: -0.065em !important;
+      }
+
+      .footer-cloud-sub {
+        font-size: 0.68rem !important;
+        letter-spacing: -0.065em !important;
+      }
+    }
+
+
+    /* ══════════════════════════════════════════════════
+       FINAL VERTICAL GAP REDUCTION — UNDERPAGE FOOTER
+       Reduces the empty space above and below the footer link group.
+    ══════════════════════════════════════════════════ */
+
+    :root {
+      --underpage-footer-height: clamp(300px, 42vh, 470px) !important;
+    }
+
+    .footer-bottom {
+      padding: clamp(1.85rem, 3.2vw, 3rem) 8vw clamp(1.65rem, 2.8vw, 2.7rem) !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .footer-bottom-inner {
+      min-height: unset !important;
+      height: auto !important;
+      justify-content: center !important;
+    }
+
+    .footer-nav-cloud {
+      margin-bottom: clamp(0.95rem, 1.7vw, 1.45rem) !important;
+      gap: 0.04rem !important;
+    }
+
+    .footer-cloud-row {
+      gap: 0.08rem clamp(0.45rem, 0.85vw, 0.9rem) !important;
+    }
+
+    .footer-bottom .footer-copy {
+      margin-top: 0 !important;
+    }
+
+    @media (max-width: 900px) {
+      :root {
+        --underpage-footer-height: clamp(310px, 45vh, 480px) !important;
+      }
+
+      .footer-bottom {
+        padding: 2rem 6vw 1.8rem !important;
+      }
+
+      .footer-nav-cloud {
+        margin-bottom: 1.2rem !important;
+      }
+    }
+
+    @media (max-width: 540px) {
+      :root {
+        --underpage-footer-height: clamp(330px, 50vh, 500px) !important;
+      }
+
+      .footer-bottom {
+        padding: 2rem 1.2rem 1.8rem !important;
+      }
+    }
+
 </style>
 </head>
 
