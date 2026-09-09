@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>The Gallery — Saubhagya Jung Thapa</title>
+  <meta name="description" content="Walk through an original Newari-inspired courtyard gallery of Saubhagya Jung Thapa’s development projects and visual work. Kathmandu, Nepal.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Gallery — Saubhagya Jung Thapa">
+  <meta property="og:description" content="A quiet Newari-inspired courtyard. A different way to experience the work.">
+  <meta property="og:url" content="https://thapasaubhagya.com.np/gallery/">
+  <meta property="og:image" content="https://thapasaubhagya.com.np/assets/Feel%20Like.png">
+  <meta name="theme-color" content="#17130f">
+  <link rel="canonical" href="https://thapasaubhagya.com.np/gallery/">
+  <link rel="icon" href="../favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="gallery.css">
+  <script type="importmap">
+    {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/"}}
+  </script>
+  <script type="module" src="bootstrap.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#catalogue">Skip to the collection</a>
+  <header class="masthead">
+    <a class="signature exit-link" href="../#creative" aria-label="Saubhagya — exit gallery">saubhagya.</a>
+    <span class="masthead-caption">Bhagya's Gallery</span>
+    <nav class="gallery-nav" aria-label="Gallery navigation">
+      <button id="header-index" type="button"></button>
+      <span aria-hidden="true"></span>
+      <a class="exit-link" href="../#creative">Exit</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="experience" id="experience" aria-label="Interactive courtyard gallery" hidden>
+      <div id="scene" tabindex="0" role="region" aria-label="Walkable gallery. W A S D or arrow keys to move; Q and E to turn. Drag to look. Enter to inspect. Escape to go back." aria-describedby="instructions"></div>
+
+      <div class="entry" id="entry">
+        <div class="entry-copy">
+          <p class="eyebrow"></p>
+          <h1>The <em>Gallery.</em></h1>
+          <p class="entry-description"></p>
+          <div class="entry-actions">
+            <button class="enter-button" id="enter" disabled>Opening the doors…</button>
+            <button class="entry-browse" id="entry-browse"></button>
+          </div>
+          <p id="load-status" class="small" role="status">Preparing the courtyard</p>
+        </div>
+      </div>
+
+      <div class="walk-ui" id="walk-ui" hidden>
+        <div class="location">
+          <span class="eyebrow">Bhagy's Gallery</span>
+          <span id="room-name">\</span>
+        </div>
+        <button class="art-hint" id="art-hint" hidden></button>
+        <div class="walk-footer">
+          <p id="instructions">WASD / Arrows — Move · Drag — Look · Click floor — Walk</p>
+          <div class="walk-actions">
+            <button id="look-mode" class="desktop-only">Free look</button>
+            <button id="help">Controls</button>
+            <button id="browse">Index</button>
+          </div>
+        </div>
+        <div class="joystick" id="joystick" role="group" aria-label="Touch movement control">
+          <span class="joystick-knob"></span><span class="joystick-label">MOVE</span>
+        </div>
+      </div>
+      <p id="scene-status" class="sr-only" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="catalogue" class="catalogue" aria-labelledby="catalogue-title" tabindex="-1">
+      <div class="catalogue-intro">
+        <div><p class="eyebrow">The Gallery / Collection index</p><h1 id="catalogue-title">Work, in<br><em>good company.</em></h1></div>
+        <div><p id="fallback-message">Development, design, and visual explorations by Saubhagya Jung Thapa.</p><button id="return-walk" hidden>Return to the courtyard ↗</button></div>
+      </div>
+      <noscript><p class="notice">Explore the complete collection below. Enable JavaScript to walk through the courtyard.</p></noscript>
+      <section class="collection" aria-labelledby="work-title"><div class="collection-heading"><span class="eyebrow">01</span><h2 id="work-title">Selected Work</h2></div><div class="collection-grid"><article id="work-satwa-homes"><a class="catalogue-image" href="media/satwa-homes.webp" data-inspect="satwa-homes" aria-label="Explore Satwa Homes"><img src="media/satwa-homes.webp" alt="Satwa Homes — Web Application" width="1024" height="610" loading="lazy"></a><p class="eyebrow">Web Application</p><h3>Satwa Homes</h3><p>Curated web projects crafted with precision and care.</p><a href="media/satwa-homes.mp4" data-film="satwa-homes">Play film ↗</a></article><article id="work-jkb-nepal"><a class="catalogue-image" href="media/jkb-nepal.webp" data-inspect="jkb-nepal" aria-label="Explore JKB Nepal"><img src="media/jkb-nepal.webp" alt="JKB Nepal — Full-Stack" width="1024" height="612" loading="lazy"></a><p class="eyebrow">Full-Stack</p><h3>JKB Nepal</h3><p>Curated web projects crafted with precision and care.</p><a href="media/jkb-nepal.mp4" data-film="jkb-nepal">Play film ↗</a></article><article id="work-creative-portfolio"><a class="catalogue-image" href="media/creative-portfolio.webp" data-inspect="creative-portfolio" aria-label="Explore Creative Portfolio"><img src="media/creative-portfolio.webp" alt="Creative Portfolio — Portfolio" width="1024" height="610" loading="lazy"></a><p class="eyebrow">Portfolio</p><h3>Creative Portfolio</h3><p>Curated web projects crafted with precision and care.</p><a href="media/creative-portfolio.mp4" data-film="creative-portfolio">Play film ↗</a></article><article id="work-dashboard"><a class="catalogue-image" href="media/dashboard.webp" data-inspect="dashboard" aria-label="Explore Dashboard"><img src="media/dashboard.webp" alt="Dashboard — Dashboard" width="1024" height="642" loading="lazy"></a><p class="eyebrow">Dashboard</p><h3>Dashboard</h3><p>Curated web projects crafted with precision and care.</p><a href="media/dashboard.mp4" data-film="dashboard">Play film ↗</a></article></div></section><section class="collection" aria-labelledby="creative-title"><div class="collection-heading"><span class="eyebrow">02</span><h2 id="creative-title">Creative Vision</h2></div><div class="collection-grid"><article id="work-feel-like"><a class="catalogue-image" href="media/feel-like.webp" data-inspect="feel-like" aria-label="Explore Feel Like"><img src="media/feel-like.webp" alt="Feel Like — Video Edit" width="721" height="1024" loading="lazy"></a><p class="eyebrow">Video Edit</p><h3>Feel Like</h3><p>Curated artistic ventures crafted with precision and conceptual depth.</p><a href="media/feel-like.webp" data-inspect="feel-like">View artwork ↗</a></article><article id="work-2081-poster"><a class="catalogue-image" href="media/2081-poster.webp" data-inspect="2081-poster" aria-label="Explore 2081 Poster"><img src="media/2081-poster.webp" alt="2081 Poster — Event Campaign" width="724" height="1024" loading="lazy"></a><p class="eyebrow">Event Campaign</p><h3>2081 Poster</h3><p>Curated artistic ventures crafted with precision and conceptual depth.</p><a href="media/2081-poster.webp" data-inspect="2081-poster">View artwork ↗</a></article><article id="work-sisan"><a class="catalogue-image" href="media/sisan.webp" data-inspect="sisan" aria-label="Explore Sisan"><img src="media/sisan.webp" alt="Sisan — Concept Design" width="640" height="640" loading="lazy"></a><p class="eyebrow">Concept Design</p><h3>Sisan</h3><p>Curated artistic ventures crafted with precision and conceptual depth.</p><a href="media/sisan.webp" data-inspect="sisan">View artwork ↗</a></article><article id="work-elements"><a class="catalogue-image" href="media/elements.webp" data-inspect="elements" aria-label="Explore Elements"><img src="media/elements.webp" alt="Elements — Concept Design" width="640" height="640" loading="lazy"></a><p class="eyebrow">Concept Design</p><h3>Elements</h3><p>Curated artistic ventures crafted with precision and conceptual depth.</p><a href="media/elements.webp" data-inspect="elements">View artwork ↗</a></article><article id="work-sacar"><a class="catalogue-image" href="media/sacar.webp" data-inspect="sacar" aria-label="Explore Sacar"><img src="media/sacar.webp" alt="Sacar — Concept Design / Brand Identity" width="640" height="640" loading="lazy"></a><p class="eyebrow">Concept Design / Brand Identity</p><h3>Sacar</h3><p>Curated artistic ventures crafted with precision and conceptual depth.</p><a href="media/sacar.webp" data-inspect="sacar">View artwork ↗</a></article><article id="work-john-chamling-2"><a class="catalogue-image" href="media/john-chamling-2.webp" data-inspect="john-chamling-2" aria-label="Explore John Chamling 2"><img src="media/john-chamling-2.webp" alt="John Chamling 2 — Brand Identity" width="576" height="1024" loading="lazy"></a><p class="eyebrow">Brand Identity</p><h3>John Chamling 2</h3><p>Curated artistic ventures crafted with precision and conceptual depth.</p><a href="media/john-chamling-2.webp" data-inspect="john-chamling-2">View artwork ↗</a></article><article id="work-rabindra"><a class="catalogue-image" href="media/rabindra.webp" data-inspect="rabindra" aria-label="Explore Rabindra"><img src="media/rabindra.webp" alt="Rabindra — Brand Identity" width="640" height="640" loading="lazy"></a><p class="eyebrow">Brand Identity</p><h3>Rabindra</h3><p>Curated artistic ventures crafted with precision and conceptual depth.</p><a href="media/rabindra.webp" data-inspect="rabindra">View artwork ↗</a></article><article id="work-jojo"><a class="catalogue-image" href="media/jojo.webp" data-inspect="jojo" aria-label="Explore Jojo"><img src="media/jojo.webp" alt="Jojo — Brand Identity" width="640" height="640" loading="lazy"></a><p class="eyebrow">Brand Identity</p><h3>Jojo</h3><p>Curated artistic ventures crafted with precision and conceptual depth.</p><a href="media/jojo.webp" data-inspect="jojo">View artwork ↗</a></article><article id="work-paras"><a class="catalogue-image" href="media/paras.webp" data-inspect="paras" aria-label="Explore Paras"><img src="media/paras.webp" alt="Paras — Brand Identity" width="640" height="640" loading="lazy"></a><p class="eyebrow">Brand Identity</p><h3>Paras</h3><p>Curated artistic ventures crafted with precision and conceptual depth.</p><a href="media/paras.webp" data-inspect="paras">View artwork ↗</a></article><article id="work-uniq"><a class="catalogue-image" href="media/uniq.webp" data-inspect="uniq" aria-label="Explore Uniq"><img src="media/uniq.webp" alt="Uniq — Brand Identity" width="640" height="640" loading="lazy"></a><p class="eyebrow">Brand Identity</p><h3>Uniq</h3><p>Curated artistic ventures crafted with precision and conceptual depth.</p><a href="media/uniq.webp" data-inspect="uniq">View artwork ↗</a></article></div></section>
+      <footer class="catalogue-footer"><span>Saubhagya Jung Thapa · Nepal</span><a class="exit-link" href="../#creative">Back to the portfolio ↗</a></footer>
+    </section>
+  </main>
+
+  <dialog id="art-dialog" class="art-dialog" aria-labelledby="art-title">
+    <button class="dialog-close" id="close-art" aria-label="Close artwork">Close <span aria-hidden="true">×</span></button>
+    <div id="art-media" class="art-media"></div>
+    <div class="art-copy">
+      <p id="art-category" class="eyebrow"></p>
+      <h2 id="art-title"></h2>
+      <p id="art-description"></p>
+      <div class="art-actions" id="art-actions"></div>
+      <p class="small" id="asset-note"></p>
+    </div>
+  </dialog>
+
+  <dialog id="help-dialog" class="help-dialog" aria-labelledby="help-title">
+    <button class="dialog-close" id="close-help" aria-label="Close help">Close ×</button>
+    <p class="eyebrow">Orientation</p>
+    <h2 id="help-title">Move slowly.</h2>
+    <dl>
+      <dt>Walk</dt><dd>WASD / arrow keys, the touch control, or click the floor ahead</dd>
+      <dt>Look</dt><dd>Drag with mouse or touch. Q / E turn with the keyboard. Free look follows your mouse.</dd>
+      <dt>Explore</dt><dd>Click or tap an artwork nearby. Enter opens the work in front of you.</dd>
+      <dt>Back</dt><dd>Escape closes an artwork or releases free look.</dd>
+    </dl>
+    <p>Selected Work is in the west wing. Creative Vision continues through the east and north galleries.</p>
+    <button id="help-catalogue">Open the index ↗</button>
+  </dialog>
+</body>
+</html>

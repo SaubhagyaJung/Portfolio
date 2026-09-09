@@ -1,0 +1,4 @@
+{
+  "_note": "Optional metadata overrides keyed by the IDs in gallery/content.json. Only add verified titles, descriptions, years and project URLs. The portfolio HTML remains the source for assets and existing content.",
+  "items": {}
+}

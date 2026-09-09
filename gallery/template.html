@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>The Gallery — Saubhagya Jung Thapa</title>
+  <meta name="description" content="Walk through an original Newari-inspired courtyard gallery of Saubhagya Jung Thapa’s development projects and visual work. Kathmandu, Nepal.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Gallery — Saubhagya Jung Thapa">
+  <meta property="og:description" content="A quiet Newari-inspired courtyard. A different way to experience the work.">
+  <meta property="og:url" content="https://thapasaubhagya.com.np/gallery/">
+  <meta property="og:image" content="https://thapasaubhagya.com.np/assets/Feel%20Like.png">
+  <meta name="theme-color" content="#17130f">
+  <link rel="canonical" href="https://thapasaubhagya.com.np/gallery/">
+  <link rel="icon" href="../favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="gallery.css">
+  <script type="importmap">
+    {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/"}}
+  </script>
+  <script type="module" src="bootstrap.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#catalogue">Skip to the collection</a>
+  <header class="masthead">
+    <a class="signature exit-link" href="../#creative" aria-label="Saubhagya — exit gallery">saubhagya.</a>
+    <span class="masthead-caption">The Gallery · Kathmandu</span>
+    <nav class="gallery-nav" aria-label="Gallery navigation">
+      <button id="header-index" type="button">Index</button>
+      <span aria-hidden="true">/</span>
+      <a class="exit-link" href="../#creative">Exit</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="experience" id="experience" aria-label="Interactive courtyard gallery" hidden>
+      <div id="scene" tabindex="0" role="region" aria-label="Walkable gallery. W A S D or arrow keys to move; Q and E to turn. Drag to look. Enter to inspect. Escape to go back." aria-describedby="instructions"></div>
+
+      <div class="entry" id="entry">
+        <div class="entry-copy">
+          <p class="eyebrow">Kathmandu, Nepal · Digital exhibition</p>
+          <h1>The <em>Gallery.</em></h1>
+          <p class="entry-description">A Newari-inspired courtyard built as a different way to experience the work.</p>
+          <div class="entry-actions">
+            <button class="enter-button" id="enter" disabled>Opening the doors…</button>
+            <button class="entry-browse" id="entry-browse">View the index</button>
+          </div>
+          <p id="load-status" class="small" role="status">Preparing the courtyard</p>
+        </div>
+      </div>
+
+      <div class="walk-ui" id="walk-ui" hidden>
+        <div class="location">
+          <span class="eyebrow">Bhagya's Gallery</span>
+          <span id="room-name"></span>
+        </div>
+        <button class="art-hint" id="art-hint" hidden></button>
+        <div class="walk-footer">
+          <p id="instructions">WASD / Arrows — Move · Drag — Look · Click floor — Walk</p>
+          <div class="walk-actions">
+            <button id="look-mode" class="desktop-only">Free look</button>
+            <button id="help">Controls</button>
+            <button id="browse">Index</button>
+          </div>
+        </div>
+        <div class="joystick" id="joystick" role="group" aria-label="Touch movement control">
+          <span class="joystick-knob"></span><span class="joystick-label">MOVE</span>
+        </div>
+      </div>
+      <p id="scene-status" class="sr-only" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="catalogue" class="catalogue" aria-labelledby="catalogue-title" tabindex="-1">
+      <div class="catalogue-intro">
+        <div><p class="eyebrow">The Gallery / Collection index</p><h1 id="catalogue-title">Work, in<br><em>good company.</em></h1></div>
+        <div><p id="fallback-message">Development, design, and visual explorations by Saubhagya Jung Thapa.</p><button id="return-walk" hidden>Return to the courtyard ↗</button></div>
+      </div>
+      <noscript><p class="notice">Explore the complete collection below. Enable JavaScript to walk through the courtyard.</p></noscript>
+      <!-- CATALOGUE -->
+      <footer class="catalogue-footer"><span>Saubhagya Jung Thapa · Nepal</span><a class="exit-link" href="../#creative">Back to the portfolio ↗</a></footer>
+    </section>
+  </main>
+
+  <dialog id="art-dialog" class="art-dialog" aria-labelledby="art-title">
+    <button class="dialog-close" id="close-art" aria-label="Close artwork">Close <span aria-hidden="true">×</span></button>
+    <div id="art-media" class="art-media"></div>
+    <div class="art-copy">
+      <p id="art-category" class="eyebrow"></p>
+      <h2 id="art-title"></h2>
+      <p id="art-description"></p>
+      <div class="art-actions" id="art-actions"></div>
+      <p class="small" id="asset-note"></p>
+    </div>
+  </dialog>
+
+  <dialog id="help-dialog" class="help-dialog" aria-labelledby="help-title">
+    <button class="dialog-close" id="close-help" aria-label="Close help">Close ×</button>
+    <p class="eyebrow">Orientation</p>
+    <h2 id="help-title">Move slowly.</h2>
+    <dl>
+      <dt>Walk</dt><dd>WASD / arrow keys, the touch control, or click the floor ahead</dd>
+      <dt>Look</dt><dd>Drag with mouse or touch. Q / E turn with the keyboard. Free look follows your mouse.</dd>
+      <dt>Explore</dt><dd>Click or tap an artwork nearby. Enter opens the work in front of you.</dd>
+      <dt>Back</dt><dd>Escape closes an artwork or releases free look.</dd>
+    </dl>
+    <p>Selected Work is in the west wing. Creative Vision continues through the east and north galleries.</p>
+    <button id="help-catalogue">Open the index ↗</button>
+  </dialog>
+</body>
+</html>
